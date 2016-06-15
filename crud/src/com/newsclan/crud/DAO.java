@@ -367,7 +367,7 @@ public class DAO {
 		}
 	}
 
-	private static List<List> getList(String tbname, int pageNum, int pageSize) {
+	public  static List<List> getList(String tbname, int pageNum, int pageSize) {
 		// TODO Auto-generated method stub
 		return getList(tbname, "", pageNum, pageSize);
 	}
@@ -391,7 +391,7 @@ public class DAO {
 		sb.deleteCharAt(sb.length()-1);
 		return sb.toString();
 	}
-	private static List<List> getList(String tbname, String keyword,
+	public static List<List> getList(String tbname, String keyword,
 			int pageNum, int pageSize, int user_id) {
 
 		tbname = tbname.replace("`", "");
@@ -430,6 +430,7 @@ public class DAO {
 		return queryList(sql, true, values);
 
 	}
+	
 
 	private static boolean hasInputer(String tbname) {
 		// TODO Auto-generated method stub

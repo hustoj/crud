@@ -34,7 +34,10 @@ public class HUSTOJ {
 		System.out.println(checkPassword(getHash(pass),pass));
 		
 	}
-
+	public static boolean login(String username,String password){
+		String hash=DAO.queryString("select password from users where user_id=?", username);
+		return checkPassword(hash,password);
+	}
 	public static boolean checkPassword(String hash, String pass) {
 		try {
 			String salt = getSalt(hash);

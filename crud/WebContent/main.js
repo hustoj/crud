@@ -217,6 +217,7 @@
 	}
 	var inter=null;
 	//var stid=null;
-	var tableName="node";
+	var tableName="solution";
 	var searchKeyword="";
 	var thepage=0;
+    mainLoad(tableName,0);

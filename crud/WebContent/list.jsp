@@ -22,13 +22,10 @@ String keyword=request.getParameter("keyword");
 
 <%
  List data=null;
- int user_id=Tools.getUserId(session);
- if(keyword!=null&&!keyword.equals("")){
-	 System.out.format("keyword=%s\n",keyword);
-	data=DAO.getList(user_id, tbname,keyword,pageNum,Config.pageSize);
- }else{
-	data=DAO.getList(user_id, tbname,pageNum,Config.pageSize);
- }
+// int user_id=Tools.getUserId(session);
+ 
+	data=DAO.queryList("select * from solution order by solution_id desc limit 10", true);
+ 
 %>
 <%=Tools.toTable(data,"table table-striped table-hover") %>	
 </body>

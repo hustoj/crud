@@ -32,35 +32,14 @@
   <!-- Collect the nav links, forms, and other content for toggling -->
   <div class="navbar bs-navbar" >
     <a class="navbar-brand" href="https://github.com/zhblue/crud" target='_blank'><%=Config.get("system.name") %></a>
-      <%
-      int user_id=Tools.getUserId(session);
-      	List<String> tables=com.newsclan.crud.DAO.getTables(user_id);
-		Iterator<String> it=tables.iterator(); 
-		while(it.hasNext()){ 
-			String table=it.next();
-			out.println("<a class=\"btn navbar-brand\" href=\"#"+table+"\" onclick='mainLoad(\""+table+"\",0)'>"
-			 +DAO.translate(table)+"</a>");
-		}
-      %>
-      <%
-      if(Auth.checkPrivilegeForRightOfTable(user_id, "", "report")||Auth.isAdmin(user_id)){
-      %>
-      	 <a class="btn navbar-brand" href="#" onclick='loadReport();'>报表</a>
-      <%} %>
+     
       <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
           <input placeholder="查找" class="nav-brand form-control" onkeyup="search(this.value)" type="text">
         </div>
         <input id="auto" type="checkbox" onclick="autoRefresh()">自动刷新
       </form>
-       <%
-     if (Auth.isAdmin(user_id)
-			||Auth.checkPrivilegeForRightOfTable(user_id, "", "addTable")){
-		%>
-     	<a class="btn navbar-brand" href="#" onclick='addTable();'><span class='glyphicon glyphicon-plus'></span></a> 
-     <%
-     }
-     %>
+      
      <a class="btn navbar-brand" href="#passChange"  onclick='passChange();'><span class='glyphicon glyphicon-user'></span></a>
      <a class="btn navbar-brand" href="logout.jsp" ><span class='glyphicon glyphicon-log-out'></span></a>
    
