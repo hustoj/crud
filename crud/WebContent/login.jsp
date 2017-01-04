@@ -9,24 +9,22 @@
 	String rand = request.getParameter("rand");
 	if (rand != null && rand.equals(session.getAttribute("rand"))){
 		session.setAttribute("rand",null);
-		if (HUSTOJ.login(username, passwd)) { 
-			sql = "SELECT  * from "+Config.sysPrefix+"users where user_id=? ";
+		if (Tools.login(username, passwd)) {
+			sql = "SELECT  * from "+Config.sysPrefix+"user where name=? ";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, username);
 			ResultSet rs = pstmt.executeQuery();
-			String user_id="";
 			if (rs.next()) {
-				user_id=rs.getString("user_id");
-				session.setAttribute("user_id", rs.getString("user_id"));
-				session.setAttribute("user_name", rs.getString("user_id"));
+				session.setAttribute("user_id", rs.getInt("id"));
+				session.setAttribute("user_name", username);
 			}
-			sql = "SELECT  `rightstr` from "+Config.sysPrefix+"privilege where user_id=?";
-			
+			sql = "SELECT  `right` from "+Config.sysPrefix+"privilege where user_id=?";
+			int user_id = rs.getInt("id");
 			DB.close(rs);
 			DB.close(pstmt);
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, user_id);
+			pstmt.setInt(1, user_id);
 
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -40,7 +38,7 @@
 			response.sendRedirect("login.jsp");
 		}
 	} else {
-		//System.out.println(1);
+		System.out.println(1);
 		%>
 		<form method="post" action="login.jsp">
 		<table align=center>
